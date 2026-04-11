@@ -3,542 +3,107 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Biotap</title>
+    <title>moose</title>
+    <meta property="og:title" content="qtMoose" />
+    <meta property="og:description" content="The Same Power That Raised Jesus From The Dead Is At Work In You." />
+    <meta property="og:url" content="https://biotap.cc/moose/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://biotap.cc/moose/assets/pfp.gif" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="qtMoose" />
+    <meta name="twitter:description" content="The Same Power That Raised Jesus From The Dead Is At Work In You." />
+    <meta name="twitter:image" content="https://biotap.cc/moose/assets/pfp.gif" />
+    <link rel="stylesheet" href="./style.css?v=32" />
     <style>
         :root {
-            color-scheme: dark;
-            --bg: #050505;
-            --panel: rgba(255, 255, 255, 0.035);
-            --border: rgba(255, 255, 255, 0.08);
-            --text: rgba(255, 255, 255, 0.96);
-            --muted: rgba(255, 255, 255, 0.56);
-            --green: #22c977;
-            --green-deep: #169b5c;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html,
-        body {
-            margin: 0;
-            min-height: 100%;
-            background:
-                radial-gradient(circle at top, rgba(255, 255, 255, 0.06), transparent 24%),
-                radial-gradient(circle at 20% 80%, rgba(34, 201, 119, 0.09), transparent 20%),
-                radial-gradient(circle at 82% 18%, rgba(255, 255, 255, 0.04), transparent 16%),
-                var(--bg);
-            color: var(--text);
-            font-family: Consolas, "Courier New", monospace;
-        }
-
-        body {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            overflow: hidden;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            opacity: 0.24;
-            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.88) 0 1px, transparent 1.5px);
-            background-size: 150px 150px;
-            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95), transparent 90%);
-        }
-
-        body::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            background: radial-gradient(circle at center, transparent 46%, rgba(0, 0, 0, 0.3) 100%);
-        }
-
-        #particles {
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .shell {
-            position: relative;
-            width: min(760px, 100%);
-            padding: 24px;
-            border-radius: 30px;
-            background: rgba(12, 12, 12, 0.68);
-            border: 1px solid var(--border);
-            box-shadow:
-                0 30px 80px rgba(0, 0, 0, 0.42),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            z-index: 1;
-        }
-
-        .shell::before {
-            content: "";
-            position: absolute;
-            inset: 1px;
-            border-radius: 29px;
-            pointer-events: none;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 18%);
-        }
-
-        .brand {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 9px 13px;
-            border-radius: 999px;
-            background: var(--panel);
-            border: 1px solid var(--border);
-            font-size: 12px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .brand-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--green);
-            box-shadow: 0 0 12px rgba(34, 201, 119, 0.4);
-        }
-
-        .brand-tooltip {
-            position: absolute;
-            left: 0;
-            bottom: calc(100% + 12px);
-            transform: translateY(4px);
-            padding: 8px 12px;
-            border-radius: 999px;
-            background: rgba(14, 14, 14, 0.84);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow:
-                0 10px 24px rgba(0, 0, 0, 0.24),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            color: rgba(255, 255, 255, 0.92);
-            font-size: 11px;
-            letter-spacing: 0.04em;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.18s ease, transform 0.18s ease;
-        }
-
-        .brand:hover .brand-tooltip {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .brand-tooltip-value {
-            color: #9cff57;
-            text-shadow:
-                0 0 8px rgba(156, 255, 87, 0.55),
-                0 0 16px rgba(156, 255, 87, 0.28);
-        }
-
-        .hero {
-            padding: 72px 18px 64px;
-            text-align: center;
-        }
-
-        h1 {
-            margin: 18px 0 14px;
-            font-size: clamp(44px, 9vw, 88px);
-            line-height: 0.92;
-            letter-spacing: -0.06em;
-            text-shadow:
-                0 0 8px rgba(255, 255, 255, 0.18),
-                0 0 18px rgba(255, 255, 255, 0.08);
-        }
-
-        .hero-glow {
-            display: inline-block;
-            color: var(--green);
-            text-shadow:
-                0 0 8px rgba(34, 201, 119, 0.55),
-                0 0 16px rgba(34, 201, 119, 0.28);
-            animation: hero-glow-shift 4.6s ease-in-out infinite;
-        }
-
-        .hero-glow.fx-active {
-            animation:
-                hero-glow-shift 4.6s ease-in-out infinite,
-                hero-flicker 0.42s steps(1, end) 1,
-                hero-jitter 0.42s ease-in-out 1;
-        }
-
-        p {
-            max-width: 520px;
-            margin: 0 auto;
-            color: var(--muted);
-            font-size: clamp(15px, 2vw, 18px);
-            line-height: 1.75;
-        }
-
-        .request-form {
-            width: min(520px, 100%);
-            margin: 30px auto 0;
-            display: grid;
-            gap: 14px;
-            text-align: left;
-        }
-
-        .field {
-            display: grid;
-            gap: 8px;
-        }
-
-        .field-label {
-            color: rgba(255, 255, 255, 0.72);
-            font-size: 12px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .field-input,
-        .field-textarea {
-            width: 100%;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.035);
-            color: var(--text);
-            font: inherit;
-            outline: none;
-            user-select: text;
-            -webkit-user-select: text;
-            transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
-        }
-
-        .field-input {
-            height: 54px;
-            padding: 0 16px;
-        }
-
-        .field-textarea {
-            min-height: 120px;
-            padding: 14px 16px;
-            resize: vertical;
-        }
-
-        .field-input::placeholder,
-        .field-textarea::placeholder {
-            color: rgba(255, 255, 255, 0.34);
-        }
-
-        .field-input:focus,
-        .field-textarea:focus {
-            border-color: rgba(34, 201, 119, 0.48);
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 0 0 4px rgba(34, 201, 119, 0.08);
-        }
-
-        .field-note {
-            margin-top: 2px;
-            color: rgba(255, 120, 120, 0.78);
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        .cta {
-            min-width: 184px;
-            height: 56px;
-            padding: 0 24px;
-            margin-top: 6px;
-            border: 0;
-            border-radius: 16px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: #fff;
-            font: inherit;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            background: linear-gradient(180deg, var(--green), var(--green-deep));
-            box-shadow: 0 0 24px rgba(34, 201, 119, 0.18);
-            transition: transform 0.18s ease, filter 0.18s ease;
-        }
-
-        .cta:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.04);
-        }
-
-        .success-note {
-            margin: 18px auto 0;
-            width: fit-content;
-            max-width: 100%;
-            padding: 10px 14px;
-            border-radius: 999px;
-            background: rgba(34, 201, 119, 0.12);
-            border: 1px solid rgba(34, 201, 119, 0.22);
-            color: rgba(255, 255, 255, 0.92);
-            font-size: 13px;
-            letter-spacing: 0.04em;
-            display: none;
-        }
-
-        .success-note.visible {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .success-note.error {
-            background: rgba(255, 90, 90, 0.12);
-            border-color: rgba(255, 90, 90, 0.22);
-        }
-
-        @keyframes hero-glow-shift {
-            0%,
-            100% {
-                text-shadow:
-                    0 0 8px rgba(34, 201, 119, 0.55),
-                    0 0 16px rgba(34, 201, 119, 0.28);
-            }
-
-            50% {
-                text-shadow:
-                    0 0 10px rgba(34, 201, 119, 0.72),
-                    0 0 24px rgba(34, 201, 119, 0.34);
-            }
-        }
-
-        @keyframes hero-flicker {
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            18%,
-            42%,
-            68% {
-                opacity: 0.72;
-            }
-
-            26%,
-            55%,
-            78% {
-                opacity: 0.92;
-            }
-        }
-
-        @keyframes hero-jitter {
-            0%,
-            100% {
-                transform: translate(0, 0);
-            }
-
-            20% {
-                transform: translate(-2px, 0);
-            }
-
-            40% {
-                transform: translate(2px, 0);
-            }
-
-            60% {
-                transform: translate(-2px, 1px);
-            }
-
-            80% {
-                transform: translate(2px, -1px);
-            }
-        }
-
-        @media (max-width: 640px) {
-            body {
-                padding: 14px;
-            }
-
-            .shell {
-                padding: 16px;
-                border-radius: 24px;
-            }
-
-            .hero {
-                padding: 54px 8px 48px;
-            }
+            --site-cursor: url("./assets/cursor.cur") 16 16, auto;
         }
     </style>
 </head>
 <body>
+    <video autoplay muted loop playsinline id="bgvid">
+        <source src="./assets/background.mp4" type="video/mp4" />
+        <source src="https://website-1ir.pages.dev/assets/background.mp4" type="video/mp4" />
+    </video>
+    <audio id="bgmusic" loop>
+        <source src="./assets/backgroundmusic.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div id="bg-overlay"></div>
     <canvas id="particles"></canvas>
+    <div id="cursor-light"></div>
 
-    <main class="shell">
-        <div class="brand">
-            <span class="brand-dot"></span>
-            Biotap
-            <span class="brand-tooltip">Total users: <span class="brand-tooltip-value">2</span></span>
-        </div>
+    <div id="intro">
+        <div id="heart">★</div>
+        <div id="enter">click to enter</div>
+    </div>
 
-        <section class="hero">
-            <h1>Request your <span class="hero-glow">Custom Bio</span>.</h1>
-            <p>
-                Clean, custom profile pages built personally.
-                Minimal, fast, and made to feel personal.
-            </p>
-            <form class="request-form" id="request-form" action="https://formspree.io/f/mbdpnjya" method="POST">
-                <label class="field">
-                    <span class="field-label">Your email</span>
-                    <input class="field-input" type="email" name="email" placeholder="you@example.com" required />
-                </label>
+    <main id="main">
+        <section id="profile-wrap">
+            <div id="rain-layer"></div>
+            <div id="profile-views" data-user="moose">
+                <span class="views-eye">◉</span>
+                <span id="profile-views-count">...</span>
+            </div>
+            <div id="member-rank">
+                <img
+                    src="./assets/user.png"
+                    alt="Member icon"
+                    id="member-rank-icon"
+                    onerror="this.onerror=null;this.src='https://website-1ir.pages.dev/assets/user.png';"
+                />
+                <span id="member-rank-tooltip">User: #2</span>
+            </div>
 
-                <label class="field">
-                    <span class="field-label">How should your bio look?</span>
-                    <textarea
-                        class="field-textarea"
-                        name="message"
-                        placeholder="Tell me what username you want and any style ideas."
-                        required
-                    ></textarea>
-                    <span class="field-note">Please be patient while your bio request is reviewed.</span>
-                </label>
+            <div id="eye-banner">
+            </div>
 
-                <button class="cta" id="request-submit" type="submit">Request your custom bio</button>
-            </form>
-            <div class="success-note" id="success-note">Email sent.</div>
+            <div id="avatar-shell">
+                <img id="pfp" src="./assets/pfp.gif" alt="Moose avatar" />
+            </div>
+
+            <div id="silhouette"></div>
+
+            <div id="identity">
+                <h1 id="username" data-text="qtMoose">qtMoose</h1>
+
+                <div id="mini-badges">
+                    <span class="mini-badge asset-badge">
+                        <img
+                            src="./assets/beta.png"
+                            alt="Beta badge"
+                            onerror="this.onerror=null;this.src='https://website-1ir.pages.dev/assets/beta.png';"
+                        />
+                        <span class="mini-badge-tooltip">Beta</span>
+                    </span>
+                </div>
+
+                <div id="tag-row">
+                    <span class="identity-pill">Jesus Loves You. ✝️</span>
+                </div>
+
+                <a id="profile-link" href="https://biotap.cc/moose">Roman 8:11</a>
+                <p id="status" data-text="The Same Power That Raised Jesus From The Dead Is At Work In You.">The Same Power That Raised Jesus From The Dead Is At Work In You.</p>
+                <p id="location">Pittsburgh PA</p>
+
+                <div id="social-icons">
+                    <a href="#" id="discord-copy" aria-label="Discord">
+                        <img src="./assets/discord.png" alt="Discord" />
+                        <span id="discord-copy-tooltip">Copied Discord tag</span>
+                    </a>
+                    <a href="https://www.roblox.com/users/3522820629/profile" id="roblox-link" aria-label="Roblox">
+                        <img src="./assets/roblox.png" alt="Roblox" />
+                        <span id="roblox-redirect-tooltip">Redirecting you to Roblox</span>
+                    </a>
+                    <a href="https://namemc.com/qtmoose" id="namemc-link" aria-label="NameMC">
+                        <img src="./assets/namemc.png" alt="NameMC" />
+                        <span id="namemc-redirect-tooltip">Redirecting you to NameMC</span>
+                    </a>
+                </div>
+            </div>
         </section>
     </main>
 
-    <script>
-        const requestForm = document.getElementById("request-form");
-        const requestSubmit = document.getElementById("request-submit");
-        const successNote = document.getElementById("success-note");
-
-        if (requestForm && requestSubmit && successNote) {
-            requestForm.addEventListener("submit", async (event) => {
-                event.preventDefault();
-
-                successNote.classList.remove("visible", "error");
-                requestSubmit.disabled = true;
-                requestSubmit.textContent = "Sending...";
-
-                try {
-                    const response = await fetch(requestForm.action, {
-                        method: "POST",
-                        body: new FormData(requestForm),
-                        headers: {
-                            Accept: "application/json"
-                        }
-                    });
-
-                    if (!response.ok) {
-                        throw new Error("Form submission failed");
-                    }
-
-                    requestForm.reset();
-                    successNote.textContent = "Email sent.";
-                    successNote.classList.add("visible");
-                } catch (error) {
-                    successNote.textContent = "Something went wrong. Please try again.";
-                    successNote.classList.add("visible", "error");
-                } finally {
-                    requestSubmit.disabled = false;
-                    requestSubmit.textContent = "Request your custom bio";
-                }
-            });
-        }
-    </script>
-
-    <script>
-        const particlesCanvas = document.getElementById("particles");
-        const heroGlow = document.querySelector(".hero-glow");
-
-        if (particlesCanvas) {
-            const ctx = particlesCanvas.getContext("2d");
-            const particles = [];
-            const particleCount = 44;
-
-            function resizeParticles() {
-                particlesCanvas.width = window.innerWidth;
-                particlesCanvas.height = window.innerHeight;
-            }
-
-            function seedParticles() {
-                particles.length = 0;
-
-                for (let i = 0; i < particleCount; i += 1) {
-                    particles.push({
-                        x: Math.random() * particlesCanvas.width,
-                        y: Math.random() * particlesCanvas.height,
-                        size: Math.random() * 2.4 + 0.6,
-                        speedY: Math.random() * 0.6 + 0.2,
-                        drift: (Math.random() - 0.5) * 0.18,
-                        alpha: Math.random() * 0.5 + 0.15
-                    });
-                }
-            }
-
-            function drawParticles() {
-                ctx.clearRect(0, 0, particlesCanvas.width, particlesCanvas.height);
-
-                for (const particle of particles) {
-                    particle.x += particle.drift;
-                    particle.y += particle.speedY;
-
-                    if (particle.y > particlesCanvas.height + 8) {
-                        particle.y = -8;
-                        particle.x = Math.random() * particlesCanvas.width;
-                    }
-
-                    if (particle.x < -8) {
-                        particle.x = particlesCanvas.width + 8;
-                    } else if (particle.x > particlesCanvas.width + 8) {
-                        particle.x = -8;
-                    }
-
-                    ctx.beginPath();
-                    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(255,255,255,${particle.alpha})`;
-                    ctx.fill();
-                }
-
-                window.requestAnimationFrame(drawParticles);
-            }
-
-            resizeParticles();
-            seedParticles();
-            drawParticles();
-            window.addEventListener("resize", () => {
-                resizeParticles();
-                seedParticles();
-            });
-        }
-
-        if (heroGlow) {
-            function triggerGlowFx() {
-                heroGlow.classList.remove("fx-active");
-                void heroGlow.offsetWidth;
-                heroGlow.classList.add("fx-active");
-
-                window.setTimeout(() => {
-                    heroGlow.classList.remove("fx-active");
-                }, 420);
-
-                const nextDelay = 950 + Math.random() * 1200;
-                window.setTimeout(triggerGlowFx, nextDelay);
-            }
-
-            window.setTimeout(triggerGlowFx, 1800);
-        }
-    </script>
+    <script src="./effects.js?v=32"></script>
 </body>
 </html>
