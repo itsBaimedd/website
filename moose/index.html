@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>moose</title>
+    <link rel="stylesheet" href="./style.css?v=32" />
+    <style>
+        :root {
+            --site-cursor: url("./assets/cursor.cur") 16 16, auto;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop playsinline id="bgvid">
+        <source src="./assets/background.mp4" type="video/mp4" />
+        <source src="https://website-1ir.pages.dev/assets/background.mp4" type="video/mp4" />
+    </video>
+    <audio id="bgmusic" loop>
+        <source src="./assets/backgroundmusic.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div id="bg-overlay"></div>
+    <canvas id="particles"></canvas>
+    <div id="cursor-light"></div>
+
+    <div id="intro">
+        <div id="heart">★</div>
+        <div id="enter">click to enter</div>
+    </div>
+
+    <main id="main">
+        <section id="profile-wrap">
+            <div id="rain-layer"></div>
+            <div id="profile-views" data-user="moose">
+                <span class="views-eye">◉</span>
+                <span id="profile-views-count">...</span>
+            </div>
+            <div id="member-rank">
+                <img
+                    src="./assets/user.png"
+                    alt="Member icon"
+                    id="member-rank-icon"
+                    onerror="this.onerror=null;this.src='https://website-1ir.pages.dev/assets/user.png';"
+                />
+                <span id="member-rank-tooltip">User: #2</span>
+            </div>
+
+            <div id="eye-banner">
+            </div>
+
+            <div id="avatar-shell">
+                <img id="pfp" src="./assets/pfp.gif" alt="Moose avatar" />
+            </div>
+
+            <div id="silhouette"></div>
+
+            <div id="identity">
+                <h1 id="username" data-text="qtMoose">qtMoose</h1>
+
+                <div id="mini-badges">
+                    <span class="mini-badge asset-badge">
+                        <img
+                            src="./assets/beta.png"
+                            alt="Beta badge"
+                            onerror="this.onerror=null;this.src='https://website-1ir.pages.dev/assets/beta.png';"
+                        />
+                        <span class="mini-badge-tooltip">Beta</span>
+                    </span>
+                </div>
+
+                <div id="tag-row">
+                    <span class="identity-pill">Jesus Loves You. ✝️</span>
+                </div>
+
+                <a id="profile-link" href="https://biotap.cc/moose">Roman 8:11</a>
+                <p id="status" data-text="The Same Power That Raised Jesus From The Dead Is At Work In You.">The Same Power That Raised Jesus From The Dead Is At Work In You.</p>
+                <p id="location">Pittsburgh PA</p>
+
+                <div id="social-icons">
+                    <a href="#" id="discord-copy" aria-label="Discord">
+                        <img src="./assets/discord.png" alt="Discord" />
+                        <span id="discord-copy-tooltip">Copied Discord tag</span>
+                    </a>
+                    <a href="https://www.roblox.com/" id="roblox-link" aria-label="Roblox">
+                        <img src="./assets/roblox.png" alt="Roblox" />
+                        <span id="roblox-redirect-tooltip">Redirecting you to Roblox</span>
+                    </a>
+                    <a href="https://namemc.com/" id="namemc-link" aria-label="NameMC">
+                        <img src="./assets/namemc.png" alt="NameMC" />
+                        <span id="namemc-redirect-tooltip">Redirecting you to NameMC</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="./effects.js?v=32"></script>
+</body>
+</html>
