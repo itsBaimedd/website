@@ -247,6 +247,7 @@ body {
 #pfp-wrap {
     position: relative;
     flex-shrink: 0;
+    overflow: visible;
 }
 
 #pfp {
@@ -263,8 +264,9 @@ body {
 
 #profile-views {
     position: absolute;
-    top: -12px;
-    left: -16px;
+    top: -18px;
+    left: 0;
+    transform: translateX(-42%);
     padding: 7px 10px;
     border-radius: 999px;
     display: inline-flex;
@@ -692,8 +694,9 @@ body {
     }
 
     #profile-views {
-        top: -10px;
-        left: -12px;
+        top: -16px;
+        left: 2px;
+        transform: translateX(-38%);
     }
 
     #social-card {
