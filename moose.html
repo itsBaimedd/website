@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>moose</title>
+    <meta property="og:title" content="qtMoose" />
+    <meta property="og:description" content="The Same Power That Raised Jesus From The Dead Is At Work In You." />
+    <meta property="og:url" content="https://biotap.cc/moose" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://biotap.cc/moose/assets/pfp.gif" />
+    <link rel="canonical" href="https://biotap.cc/moose" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="qtMoose" />
+    <meta name="twitter:description" content="The Same Power That Raised Jesus From The Dead Is At Work In You." />
+    <meta name="twitter:image" content="https://biotap.cc/moose/assets/pfp.gif" />
+    <link rel="stylesheet" href="./moose/style.css?v=33" />
+    <style>
+        :root {
+            --site-cursor: url("./moose/assets/cursor.cur") 16 16, auto;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop playsinline id="bgvid">
+        <source src="./moose/assets/background.mp4" type="video/mp4" />
+        <source src="https://website-1ir.pages.dev/assets/background.mp4" type="video/mp4" />
+    </video>
+    <audio id="bgmusic" loop>
+        <source src="./moose/assets/backgroundmusic.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div id="bg-overlay"></div>
+    <canvas id="particles"></canvas>
+    <div id="cursor-light"></div>
+
+    <div id="intro">
+        <div id="heart">★</div>
+        <div id="enter">click to enter</div>
+    </div>
+
+    <main id="main">
+        <section id="profile-wrap">
+            <div id="rain-layer"></div>
+            <div id="profile-views" data-user="moose">
+                <span class="views-eye">◉</span>
+                <span id="profile-views-count">...</span>
+            </div>
+            <div id="member-rank">
+                <img
+                    src="./moose/assets/user.png"
+                    alt="Member icon"
+                    id="member-rank-icon"
+                    onerror="this.onerror=null;this.src='https://website-1ir.pages.dev/assets/user.png';"
+                />
+                <span id="member-rank-tooltip">User: #2</span>
+            </div>
+
+            <div id="eye-banner"></div>
+
+            <div id="avatar-shell">
+                <img id="pfp" src="./moose/assets/pfp.gif" alt="Moose avatar" />
+            </div>
+
+            <div id="silhouette"></div>
+
+            <div id="identity">
+                <h1 id="username" data-text="qtMoose">qtMoose</h1>
+
+                <div id="mini-badges">
+                    <span class="mini-badge asset-badge">
+                        <img
+                            src="./moose/assets/beta.png"
+                            alt="Beta badge"
+                            onerror="this.onerror=null;this.src='https://website-1ir.pages.dev/assets/beta.png';"
+                        />
+                        <span class="mini-badge-tooltip">Beta</span>
+                    </span>
+                </div>
+
+                <div id="tag-row">
+                    <span class="identity-pill">Jesus Loves You. ✝️</span>
+                </div>
+
+                <a id="profile-link" href="https://biotap.cc/moose">Roman 8:11</a>
+                <p id="status" data-text="The Same Power That Raised Jesus From The Dead Is At Work In You.">The Same Power That Raised Jesus From The Dead Is At Work In You.</p>
+                <p id="location">Pittsburgh PA</p>
+
+                <div id="social-icons">
+                    <a href="#" id="discord-copy" aria-label="Discord">
+                        <img src="./moose/assets/discord.png" alt="Discord" />
+                        <span id="discord-copy-tooltip">Copied Discord tag</span>
+                    </a>
+                    <a href="https://www.roblox.com/users/3522820629/profile" id="roblox-link" aria-label="Roblox">
+                        <img src="./moose/assets/roblox.png" alt="Roblox" />
+                        <span id="roblox-redirect-tooltip">Redirecting you to Roblox</span>
+                    </a>
+                    <a href="https://namemc.com/qtmoose" id="namemc-link" aria-label="NameMC">
+                        <img src="./moose/assets/namemc.png" alt="NameMC" />
+                        <span id="namemc-redirect-tooltip">Redirecting you to NameMC</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="./moose/effects.js?v=33"></script>
+</body>
+</html>
