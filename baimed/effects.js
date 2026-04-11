@@ -10,6 +10,8 @@ const discordIcon = document.getElementById("discord-icon");
 const discordTitle = document.getElementById("discord-title");
 const discordSubtext = document.getElementById("discord-subtext");
 const joined = document.getElementById("joined");
+const profileViews = document.getElementById("profile-views");
+const profileViewsCount = document.getElementById("profile-views-count");
 const discordCopy = document.getElementById("discord-copy");
 const tiktokLink = document.getElementById("tiktok-link");
 const instagramLink = document.getElementById("instagram-link");
@@ -363,6 +365,30 @@ function updateJoinedText(element) {
     element.textContent = `Joined ${safeYears} year${safeYears === 1 ? "" : "s"} ago`;
 }
 
+async function hydrateProfileViews(container, countElement) {
+    if (!container || !countElement) return;
+
+    const user = container.dataset.user;
+
+    if (!user) return;
+
+    try {
+        const response = await fetch(`/api/views?user=${encodeURIComponent(user)}`, {
+            cache: "no-store"
+        });
+
+        if (!response.ok) {
+            throw new Error(`Views request failed with ${response.status}`);
+        }
+
+        const data = await response.json();
+        const count = typeof data.views === "number" ? data.views : 0;
+        countElement.textContent = count.toLocaleString();
+    } catch (error) {
+        countElement.textContent = "0";
+    }
+}
+
 async function hydrateDiscordCard(card) {
     if (!card || !discordTitle || !discordSubtext || !discordIcon) return;
 
@@ -427,6 +453,7 @@ document.addEventListener(
             typeStatus(status);
             typeDocumentTitle();
             updateJoinedText(joined);
+            hydrateProfileViews(profileViews, profileViewsCount);
             hydrateDiscordCard(socialCard);
 
             if (!particlesStarted) {
