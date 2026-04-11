@@ -12,7 +12,7 @@ const robloxLink = document.getElementById("roblox-link");
 const namemcLink = document.getElementById("namemc-link");
 const profileWrap = document.getElementById("profile-wrap");
 
-const usernameText = username?.dataset.text || "qtMoose";
+const usernameText = username?.dataset.text || "qtmoose";
 
 let started = false;
 let particlesStarted = false;
