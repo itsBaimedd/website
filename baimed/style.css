@@ -263,8 +263,8 @@ body {
 
 #profile-views {
     position: absolute;
-    top: -10px;
-    left: -6px;
+    top: -12px;
+    left: -16px;
     padding: 7px 10px;
     border-radius: 999px;
     display: inline-flex;
@@ -282,6 +282,7 @@ body {
     font-weight: 700;
     letter-spacing: 0.03em;
     white-space: nowrap;
+    z-index: 3;
 }
 
 .views-eye {
@@ -691,8 +692,8 @@ body {
     }
 
     #profile-views {
-        top: -8px;
-        left: -4px;
+        top: -10px;
+        left: -12px;
     }
 
     #social-card {
