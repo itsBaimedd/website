@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>cloakzu</title>
+    <meta property="og:title" content="cloakzu" />
+    <meta property="og:description" content="The Same Power That Raised Jesus From The Dead Is At Work In You." />
+    <meta property="og:url" content="https://biotap.cc/cloakzu" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://biotap.cc/cloak/assets/pfp.png" />
+    <link rel="canonical" href="https://biotap.cc/cloakzu" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="cloakzu" />
+    <meta name="twitter:description" content="The Same Power That Raised Jesus From The Dead Is At Work In You." />
+    <meta name="twitter:image" content="https://biotap.cc/cloak/assets/pfp.png" />
+    <link rel="stylesheet" href="./cloak/style.css?v=3" />
+    <style>
+        :root {
+            --site-cursor: url("/cloak/assets/cursor.cur") 16 16, auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="bgvid" aria-hidden="true"></div>
+    <audio id="bgmusic" loop>
+        <source src="./cloak/assets/backgroundmusic.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div id="bg-overlay"></div>
+    <div id="ambient-flares" aria-hidden="true"></div>
+    <canvas id="particles"></canvas>
+    <div id="cursor-light"></div>
+
+    <div id="intro">
+        <div id="heart">★</div>
+        <div id="enter">click to enter</div>
+    </div>
+
+    <main id="main">
+        <section id="profile-wrap">
+            <div id="energy-ring" aria-hidden="true"></div>
+            <div id="rain-layer"></div>
+            <div id="profile-views" data-user="cloakzu">
+                <span class="views-eye">◉</span>
+                <span id="profile-views-count">...</span>
+            </div>
+            <div id="member-rank">
+                <img
+                    src="./cloak/assets/user.png"
+                    alt="Member icon"
+                    id="member-rank-icon"
+                    onerror="this.onerror=null;this.src='https://website-1ir.pages.dev/assets/user.png';"
+                />
+                <span id="member-rank-tooltip">User: #4</span>
+            </div>
+
+            <div id="eye-banner"></div>
+
+            <div id="avatar-shell">
+                <img id="pfp" src="./cloak/assets/pfp.gif" alt="Cloakzu avatar" />
+            </div>
+
+            <div id="silhouette"></div>
+
+            <div id="identity">
+                <h1 id="username" data-text="cloakzu">cloakzu</h1>
+
+                <div id="mini-badges">
+                    <span class="mini-badge asset-badge">
+                        <img
+                            src="./cloak/assets/beta.png"
+                            alt="Beta badge"
+                            onerror="this.onerror=null;this.src='https://website-1ir.pages.dev/assets/beta.png';"
+                        />
+                        <span class="mini-badge-tooltip">Beta</span>
+                    </span>
+                </div>
+
+                <div id="tag-row">
+                    <span class="identity-pill">stay humble.</span>
+                </div>
+
+                <a id="profile-link" href="https://biotap.cc/cloakzu">Isaiah 54:17</a>
+                <p id="status" data-text="No weapon formed against you shall prosper.">No weapon formed against you shall prosper.</p>
+                <div id="social-icons">
+                    <a href="#" id="discord-copy" aria-label="Discord">
+                        <img src="./cloak/assets/discord.png" alt="Discord" />
+                        <span id="discord-copy-tooltip">Copied Discord tag</span>
+                    </a>
+                    <a href="https://open.spotify.com/user/31mtvmzpql6zrctmqfoitzx3n7p4?si=45fe88e9f5194bd2" id="roblox-link" aria-label="Spotify">
+                        <img src="./cloak/assets/spotify.png" alt="Spotify" />
+                        <span id="roblox-redirect-tooltip">Redirecting you to Spotify</span>
+                    </a>
+                    <a href="https://namemc.com/cloakzu" id="namemc-link" aria-label="NameMC">
+                        <img src="./cloak/assets/namemc.png" alt="NameMC" />
+                        <span id="namemc-redirect-tooltip">Redirecting you to NameMC</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="./cloak/effects.js?v=3"></script>
+</body>
+</html>
