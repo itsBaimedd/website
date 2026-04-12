@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>fent</title>
+    <meta property="og:title" content="fent" />
+    <meta property="og:description" content="oops i missplace my life" />
+    <meta property="og:url" content="https://biotap.cc/fent" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://biotap.cc/fent/assets/pfp.png" />
+    <link rel="canonical" href="https://biotap.cc/fent" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="fent" />
+    <meta name="twitter:description" content="oops i missplace my life" />
+    <meta name="twitter:image" content="https://biotap.cc/fent/assets/pfp.png" />
+    <link rel="stylesheet" href="./fent/style.css?v=7" />
+    <style>
+        :root {
+            --site-cursor: url("./fent/assets/cursor.cur") 16 16, url("/fent/assets/cursor.cur") 16 16, auto;
+        }
+    </style>
+</head>
+<body>
+    <button id="audio-toggle" type="button" aria-label="Toggle music">
+        <span class="speaker-ring"></span>
+        <img id="audio-toggle-icon" class="speaker-icon" src="./fent/assets/pause.png" alt="Pause audio" />
+    </button>
+
+    <video autoplay muted loop playsinline id="bgvid">
+        <source src="./fent/assets/background.mp4" type="video/mp4" />
+        <source src="https://website-1ir.pages.dev/assets/background.mp4" type="video/mp4" />
+    </video>
+    <audio id="bgmusic" loop>
+        <source src="./fent/assets/backgroundmusic.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div id="bg-overlay"></div>
+    <canvas id="particles"></canvas>
+    <div id="cursor-light"></div>
+
+    <div id="intro">
+        <div id="intro-text">i m&nbsp;&nbsp;n o t&nbsp;&nbsp;r e a l</div>
+    </div>
+
+    <main id="main">
+        <section id="profile-wrap">
+            <article id="hero-card" class="glass-card">
+                <div id="profile-views" data-user="fent">
+                    <span class="views-eye">&#9673;</span>
+                    <span id="profile-views-count">...</span>
+                </div>
+
+                <div id="member-rank">
+                    <img
+                        src="./fent/assets/user.png"
+                        alt="Member icon"
+                        id="member-rank-icon"
+                        onerror="this.onerror=null;this.src='https://website-1ir.pages.dev/assets/user.png';"
+                    />
+                    <span id="member-rank-tooltip">User: #3</span>
+                </div>
+
+                <div id="avatar-shell">
+                    <img id="pfp" src="./fent/assets/pfp.gif" alt="fent profile picture" />
+                </div>
+
+                <div id="identity">
+                    <div id="name-row">
+                        <h1 id="username">fent</h1>
+                        <div id="mini-badges">
+                            <span class="mini-badge asset-badge">
+                                <img
+                                    src="./fent/assets/beta.png"
+                                    alt="Beta badge"
+                                    onerror="this.onerror=null;this.src='https://website-1ir.pages.dev/assets/beta.png';"
+                                />
+                                <span class="mini-badge-tooltip">Beta</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <p id="status" data-text="oops i missplace my life">oops i missplace my life</p>
+
+                    <a id="center-orb" href="https://open.spotify.com/user/y1lrk845d0w1y631rt0lud7md" aria-label="Spotify" target="_blank" rel="noopener noreferrer">
+                        <img
+                            src="./fent/assets/spotify.png"
+                            alt="Spotify"
+                        />
+                        <span id="spotify-tooltip">Spotify</span>
+                    </a>
+                </div>
+            </article>
+
+            <article id="discord-card" class="glass-card">
+                <div id="discord-left">
+                    <div id="discord-avatar-shell">
+                        <img id="discord-avatar" src="./fent/assets/pfp.gif" alt="Discord avatar" />
+                        <span id="discord-online-dot"></span>
+                    </div>
+                    <div id="discord-copy">
+                        <p id="discord-name">schizo</p>
+                        <p id="discord-handle">@fenteds</p>
+                    </div>
+                </div>
+
+                <a href="#" id="discord-action">
+                    <span id="discord-action-label">Add on Discord</span>
+                    <span id="discord-action-tooltip">Copied Discord tag</span>
+                </a>
+            </article>
+
+            <section id="link-stack">
+                <button class="link-card youtube-card" type="button" id="beat-link" data-embed="https://www.youtube.com/embed/HDJi0q9widU">
+                    <span class="card-title">My First Beat</span>
+                    <span class="embed-shell" aria-hidden="true">
+                        <iframe
+                            title="My First Beat"
+                            loading="lazy"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen
+                        ></iframe>
+                    </span>
+                </button>
+                <button class="link-card accent spotify-card" type="button" id="playlist-link" data-embed="https://open.spotify.com/embed/playlist/32EUG6TXDpO2CscDmABBs8?utm_source=generator">
+                    <span class="card-title">My 2025 Playlist (CLICK ME &hearts;)</span>
+                    <span class="embed-shell" aria-hidden="true">
+                        <iframe
+                            title="2025 playlist"
+                            loading="lazy"
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        ></iframe>
+                    </span>
+                </button>
+                <button class="link-card spotify-card" type="button" id="archive-link" data-embed="https://open.spotify.com/embed/playlist/37F7uIPbVVPjUFdtGMlItn?utm_source=generator">
+                    <span class="card-title">My 2024 Playlist</span>
+                    <span class="embed-shell" aria-hidden="true">
+                        <iframe
+                            title="2024 playlist"
+                            loading="lazy"
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        ></iframe>
+                    </span>
+                </button>
+            </section>
+        </section>
+    </main>
+
+    <script src="./fent/effects.js?v=7"></script>
+</body>
+</html>
