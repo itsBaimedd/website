@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>daryl</title>
+    <meta property="og:title" content="daryl" />
+    <meta property="og:description" content="I am not afraid of tomorrow for I have seen yesterday and love today" />
+    <meta property="og:url" content="https://biotap.cc/daryl" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://biotap.cc/rna/assets/pfp.gif" />
+    <link rel="canonical" href="https://biotap.cc/daryl" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="daryl" />
+    <meta name="twitter:description" content="I am not afraid of tomorrow for I have seen yesterday and love today" />
+    <meta name="twitter:image" content="https://biotap.cc/rna/assets/pfp.gif" />
+    <link rel="stylesheet" href="./rna/style.css?v=1" />
+    <style>
+        :root {
+            --site-cursor: url("/rna/assets/cursor.cur") 16 16, auto;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop playsinline id="bgvid">
+        <source src="./rna/assets/background.mp4" type="video/mp4" />
+        <source src="https://website-1ir.pages.dev/assets/background.mp4" type="video/mp4" />
+    </video>
+    <audio id="bgmusic" loop>
+        <source src="./rna/assets/backgroundmusic.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div id="bg-overlay"></div>
+    <canvas id="particles"></canvas>
+    <div id="cursor-light"></div>
+
+    <div id="intro">
+        <div id="heart">♡</div>
+        <div id="enter">click to enter</div>
+    </div>
+
+    <main id="main">
+        <section id="profile-wrap">
+            <div id="member-rank">
+                <img
+                    src="./rna/assets/user.png"
+                    alt="Member icon"
+                    id="member-rank-icon"
+                />
+                <span id="member-rank-tooltip">User: #5</span>
+            </div>
+
+            <div id="profile-views" data-user="rna">
+                <span class="views-eye">◉</span>
+                <span id="profile-views-count">...</span>
+            </div>
+
+            <div id="top-row">
+                <div id="pfp-wrap">
+                    <img id="pfp" src="./rna/assets/pfp.gif" alt="Profile picture" />
+                </div>
+
+                <div id="identity">
+                    <div id="name-row">
+                        <h1 id="username" data-primary="rna" data-secondary="daryl"></h1>
+                        <div id="badges">
+                            <span class="badge badge-owner">
+                                <img
+                                    src="./rna/assets/beta.png"
+                                    alt="Beta badge"
+                                    class="badge-icon"
+                                />
+                                <span class="badge-tooltip">Beta</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <p id="status">I am not afraid of tomorrow for I have seen yesterday and love today</p>
+                    <p id="joined" data-joined-date="2026-04-18">Joined today</p>
+                    <div id="verse-block">
+                        <span id="verse-label">Philippians 4:13</span>
+                        <p id="verse-text" data-text="I can do all things through Christ who strengthens me">I can do all things through Christ who strengthens me</p>
+                    </div>
+                </div>
+            </div>
+
+            <a
+                id="social-card"
+                href="https://discord.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-widget-url="https://ptb.discord.com/api/guilds/1495131685518577875/widget.json"
+                data-fallback-invite="https://discord.com/"
+            >
+                <div id="discord-left">
+                    <div id="discord-icon">
+                        <img
+                            id="discord-server-icon"
+                            src="./rna/assets/discordlogo.png"
+                            alt="Discord server icon"
+                            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+                        />
+                        <span id="discord-icon-fallback">R</span>
+                    </div>
+
+                    <div id="discord-info">
+                        <div id="discord-title-row">
+                            <span id="discord-title">rna</span>
+                            <span id="discord-label">Discord</span>
+                        </div>
+
+                        <div id="discord-subtext">
+                            <span class="dot"></span>
+                            <span>Template</span>
+                            <span class="separator">•</span>
+                            <span>Update later</span>
+                        </div>
+                    </div>
+                </div>
+
+                <span id="join-wrap">
+                    <span id="join-btn">Join</span>
+                    <span id="discord-redirect-tooltip">Redirecting you to Discord</span>
+                </span>
+            </a>
+
+            <div id="social-icons">
+                <a href="#" id="discord-copy" aria-label="Discord">
+                    <img src="./rna/assets/discord.png" alt="Discord" />
+                    <span id="discord-copy-tooltip">Copied Discord tag</span>
+                </a>
+                <a href="http://instagram.com/cr1minalize/" id="instagram-link" aria-label="Instagram">
+                    <img src="./rna/assets/instagram.png" alt="Instagram" />
+                    <span id="instagram-redirect-tooltip">Redirecting you to Instagram</span>
+                </a>
+                <a href="https://namemc.com/profile/rnalol.4" id="namemc-link" aria-label="NameMC">
+                    <img src="./rna/assets/namemc.png" alt="NameMC" />
+                    <span id="namemc-redirect-tooltip">Redirecting you to NameMC</span>
+                </a>
+                <a href="https://www.youtube.com/@rnalolxo" id="youtube-link" aria-label="YouTube">
+                    <img src="./rna/assets/youtube.png" alt="YouTube" />
+                    <span id="youtube-redirect-tooltip">Redirecting you to YouTube</span>
+                </a>
+                <a href="https://tiktok.com/@rnalol69" id="tiktok-link" aria-label="TikTok">
+                    <img src="./rna/assets/tiktok.png" alt="TikTok" />
+                    <span id="tiktok-redirect-tooltip">Redirecting you to TikTok</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script src="./rna/effects.js?v=1"></script>
+</body>
+</html>
