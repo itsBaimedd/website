@@ -14,6 +14,8 @@
             --muted: rgba(255, 255, 255, 0.56);
             --green: #22c977;
             --green-deep: #169b5c;
+            --teal: #79f0ff;
+            --pink: #ff78c3;
         }
 
         * {
@@ -25,9 +27,10 @@
             margin: 0;
             min-height: 100%;
             background:
+                radial-gradient(circle at 50% 12%, rgba(121, 240, 255, 0.08), transparent 20%),
                 radial-gradient(circle at top, rgba(255, 255, 255, 0.06), transparent 24%),
                 radial-gradient(circle at 20% 80%, rgba(34, 201, 119, 0.09), transparent 20%),
-                radial-gradient(circle at 82% 18%, rgba(255, 255, 255, 0.04), transparent 16%),
+                radial-gradient(circle at 82% 18%, rgba(255, 120, 195, 0.06), transparent 16%),
                 var(--bg);
             color: var(--text);
             font-family: Consolas, "Courier New", monospace;
@@ -43,6 +46,43 @@
             overflow: hidden;
             user-select: none;
             -webkit-user-select: none;
+        }
+
+        .ambient-orb {
+            position: fixed;
+            border-radius: 999px;
+            pointer-events: none;
+            filter: blur(22px);
+            opacity: 0.28;
+            mix-blend-mode: screen;
+            z-index: 0;
+            animation: orb-float 12s ease-in-out infinite alternate;
+        }
+
+        .ambient-orb.one {
+            width: 320px;
+            height: 320px;
+            top: 6%;
+            left: -4%;
+            background: radial-gradient(circle, rgba(121, 240, 255, 0.42), transparent 70%);
+        }
+
+        .ambient-orb.two {
+            width: 360px;
+            height: 360px;
+            right: -8%;
+            bottom: 2%;
+            background: radial-gradient(circle, rgba(255, 120, 195, 0.32), transparent 70%);
+            animation-delay: -3s;
+        }
+
+        .ambient-orb.three {
+            width: 240px;
+            height: 240px;
+            top: 52%;
+            left: 50%;
+            background: radial-gradient(circle, rgba(34, 201, 119, 0.24), transparent 72%);
+            animation-delay: -6s;
         }
 
         body::before {
@@ -61,7 +101,9 @@
             position: fixed;
             inset: 0;
             pointer-events: none;
-            background: radial-gradient(circle at center, transparent 46%, rgba(0, 0, 0, 0.3) 100%);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent 14%, transparent 86%, rgba(255, 255, 255, 0.015)),
+                radial-gradient(circle at center, transparent 46%, rgba(0, 0, 0, 0.3) 100%);
         }
 
         #particles {
@@ -78,14 +120,28 @@
             width: min(760px, 100%);
             padding: 24px;
             border-radius: 30px;
-            background: rgba(12, 12, 12, 0.68);
-            border: 1px solid var(--border);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.008)),
+                rgba(12, 12, 12, 0.68);
+            border: 1px solid rgba(255, 255, 255, 0.09);
             box-shadow:
                 0 30px 80px rgba(0, 0, 0, 0.42),
+                0 0 40px rgba(121, 240, 255, 0.07),
+                0 0 80px rgba(255, 120, 195, 0.05),
                 inset 0 1px 0 rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             z-index: 1;
+            overflow: hidden;
+            transform: translateZ(0);
+        }
+
+        .shell.gateway-mode {
+            background: transparent;
+            border-color: transparent;
+            box-shadow: none;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
         }
 
         .shell::before {
@@ -95,6 +151,23 @@
             border-radius: 29px;
             pointer-events: none;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 18%);
+        }
+
+        .shell::after {
+            content: "";
+            position: absolute;
+            inset: -20%;
+            pointer-events: none;
+            background:
+                linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.055) 48%, transparent 62%);
+            opacity: 0.42;
+            transform: translateX(-42%) rotate(8deg);
+            animation: shell-sweep 7.8s linear infinite;
+        }
+
+        .shell.gateway-mode::before,
+        .shell.gateway-mode::after {
+            opacity: 0;
         }
 
         .brand {
@@ -109,6 +182,14 @@
             font-size: 12px;
             letter-spacing: 0.08em;
             text-transform: uppercase;
+            box-shadow:
+                0 0 18px rgba(121, 240, 255, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+
+        .shell.gateway-mode .brand {
+            opacity: 0;
+            pointer-events: none;
         }
 
         .brand-dot {
@@ -116,7 +197,9 @@
             height: 8px;
             border-radius: 50%;
             background: var(--green);
-            box-shadow: 0 0 12px rgba(34, 201, 119, 0.4);
+            box-shadow:
+                0 0 12px rgba(34, 201, 119, 0.4),
+                0 0 24px rgba(34, 201, 119, 0.2);
         }
 
         .brand-tooltip {
@@ -155,6 +238,144 @@
         .hero {
             padding: 72px 18px 64px;
             text-align: center;
+            position: relative;
+            transition: opacity 0.45s ease, transform 0.45s ease;
+        }
+
+        .hero.is-hidden {
+            opacity: 0;
+            transform: translateY(12px);
+            pointer-events: none;
+        }
+
+        .gateway {
+            position: absolute;
+            inset: 24px;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .gateway.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .gateway-card {
+            width: min(420px, 100%);
+            padding: 28px 24px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)),
+                rgba(10, 10, 10, 0.82);
+            box-shadow:
+                0 28px 70px rgba(0, 0, 0, 0.42),
+                0 0 36px rgba(121, 240, 255, 0.08),
+                0 0 60px rgba(255, 120, 195, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            text-align: center;
+        }
+
+        .gateway-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .gateway-title {
+            margin: 0;
+            font-size: clamp(32px, 7vw, 54px);
+            line-height: 0.95;
+            letter-spacing: -0.06em;
+            text-shadow:
+                0 0 10px rgba(255, 255, 255, 0.14),
+                0 0 28px rgba(121, 240, 255, 0.08);
+        }
+
+        .gateway-copy {
+            margin: 14px auto 0;
+            max-width: 300px;
+            color: rgba(255, 255, 255, 0.58);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .gateway-actions {
+            margin-top: 22px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .gateway-btn {
+            width: 100%;
+            min-height: 54px;
+            padding: 0 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02)),
+                rgba(255, 255, 255, 0.02);
+            color: rgba(255, 255, 255, 0.95);
+            font: inherit;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow:
+                0 0 16px rgba(121, 240, 255, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+        }
+
+        .gateway-btn:hover {
+            transform: translateY(-1px);
+            border-color: rgba(121, 240, 255, 0.16);
+            box-shadow:
+                0 0 22px rgba(121, 240, 255, 0.09),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+
+        .gateway-btn.primary {
+            background: linear-gradient(180deg, var(--green), var(--green-deep));
+            border-color: rgba(34, 201, 119, 0.22);
+            box-shadow:
+                0 0 24px rgba(34, 201, 119, 0.18),
+                0 0 42px rgba(121, 240, 255, 0.08);
+        }
+
+        .gateway-btn.primary:hover {
+            filter: brightness(1.04);
+            border-color: rgba(34, 201, 119, 0.3);
+        }
+
+        .gateway-btn.discord {
+            background: linear-gradient(180deg, #6673f6, #5662ea);
+            border-color: rgba(114, 137, 218, 0.3);
+            box-shadow:
+                0 0 22px rgba(114, 137, 218, 0.2),
+                0 0 44px rgba(114, 137, 218, 0.08);
+        }
+
+        .gateway-btn.discord:hover {
+            filter: brightness(1.05);
+            border-color: rgba(114, 137, 218, 0.42);
+            box-shadow:
+                0 0 28px rgba(114, 137, 218, 0.26),
+                0 0 52px rgba(114, 137, 218, 0.12);
         }
 
         h1 {
@@ -164,7 +385,8 @@
             letter-spacing: -0.06em;
             text-shadow:
                 0 0 8px rgba(255, 255, 255, 0.18),
-                0 0 18px rgba(255, 255, 255, 0.08);
+                0 0 18px rgba(255, 255, 255, 0.08),
+                0 0 56px rgba(255, 255, 255, 0.06);
         }
 
         .hero-glow {
@@ -172,7 +394,8 @@
             color: var(--green);
             text-shadow:
                 0 0 8px rgba(34, 201, 119, 0.55),
-                0 0 16px rgba(34, 201, 119, 0.28);
+                0 0 16px rgba(34, 201, 119, 0.28),
+                0 0 36px rgba(121, 240, 255, 0.14);
             animation: hero-glow-shift 4.6s ease-in-out infinite;
         }
 
@@ -189,6 +412,7 @@
             color: var(--muted);
             font-size: clamp(15px, 2vw, 18px);
             line-height: 1.75;
+            text-shadow: 0 0 16px rgba(255, 255, 255, 0.04);
         }
 
         .request-form {
@@ -197,6 +421,8 @@
             display: grid;
             gap: 14px;
             text-align: left;
+            position: relative;
+            z-index: 1;
         }
 
         .field {
@@ -214,15 +440,20 @@
         .field-input,
         .field-textarea {
             width: 100%;
-            border: 1px solid var(--border);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
-            background: rgba(255, 255, 255, 0.035);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+                rgba(255, 255, 255, 0.03);
             color: var(--text);
             font: inherit;
             outline: none;
             user-select: text;
             -webkit-user-select: text;
-            transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+            transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+            box-shadow:
+                0 0 0 rgba(0, 0, 0, 0),
+                inset 0 1px 0 rgba(255, 255, 255, 0.03);
         }
 
         .field-input {
@@ -245,7 +476,10 @@
         .field-textarea:focus {
             border-color: rgba(34, 201, 119, 0.48);
             background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 0 0 4px rgba(34, 201, 119, 0.08);
+            box-shadow:
+                0 0 0 4px rgba(34, 201, 119, 0.08),
+                0 0 22px rgba(121, 240, 255, 0.08);
+            transform: translateY(-1px);
         }
 
         .field-note {
@@ -272,13 +506,57 @@
             font-weight: 700;
             cursor: pointer;
             background: linear-gradient(180deg, var(--green), var(--green-deep));
-            box-shadow: 0 0 24px rgba(34, 201, 119, 0.18);
+            box-shadow:
+                0 0 24px rgba(34, 201, 119, 0.18),
+                0 0 42px rgba(121, 240, 255, 0.08);
             transition: transform 0.18s ease, filter 0.18s ease;
         }
 
         .cta:hover {
             transform: translateY(-2px);
             filter: brightness(1.04);
+        }
+
+        .music-toggle {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            z-index: 2;
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.92);
+            font: inherit;
+            font-size: 16px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow:
+                0 0 18px rgba(121, 240, 255, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .music-toggle:hover {
+            transform: translateY(-1px) scale(1.03);
+            border-color: rgba(121, 240, 255, 0.18);
+            box-shadow:
+                0 0 26px rgba(121, 240, 255, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .music-toggle.is-muted {
+            opacity: 0.78;
+        }
+
+        .music-toggle.is-hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
         .success-note {
@@ -311,13 +589,15 @@
             100% {
                 text-shadow:
                     0 0 8px rgba(34, 201, 119, 0.55),
-                    0 0 16px rgba(34, 201, 119, 0.28);
+                    0 0 16px rgba(34, 201, 119, 0.28),
+                    0 0 36px rgba(121, 240, 255, 0.14);
             }
 
             50% {
                 text-shadow:
                     0 0 10px rgba(34, 201, 119, 0.72),
-                    0 0 24px rgba(34, 201, 119, 0.34);
+                    0 0 24px rgba(34, 201, 119, 0.34),
+                    0 0 52px rgba(121, 240, 255, 0.18);
             }
         }
 
@@ -363,6 +643,26 @@
             }
         }
 
+        @keyframes orb-float {
+            0% {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate3d(20px, -18px, 0) scale(1.08);
+            }
+        }
+
+        @keyframes shell-sweep {
+            0% {
+                transform: translateX(-42%) rotate(8deg);
+            }
+
+            100% {
+                transform: translateX(46%) rotate(8deg);
+            }
+        }
+
         @media (max-width: 640px) {
             body {
                 padding: 14px;
@@ -380,16 +680,40 @@
     </style>
 </head>
 <body>
+    <audio id="page-music" loop>
+        <source src="./websitemusic.mp3" type="audio/mpeg" />
+    </audio>
     <canvas id="particles"></canvas>
+    <div class="ambient-orb one" aria-hidden="true"></div>
+    <div class="ambient-orb two" aria-hidden="true"></div>
+    <div class="ambient-orb three" aria-hidden="true"></div>
 
-    <main class="shell">
+    <main class="shell gateway-mode" id="main-shell">
+        <button class="music-toggle is-hidden" id="music-toggle" type="button" aria-label="Toggle music">||</button>
         <div class="brand">
             <span class="brand-dot"></span>
             Biotap
             <span class="brand-tooltip">Total users: <span class="brand-tooltip-value">5</span></span>
         </div>
 
-        <section class="hero">
+        <section class="gateway" id="gateway">
+            <div class="gateway-card">
+                <div class="gateway-kicker">
+                    <span class="brand-dot"></span>
+                    Gateway
+                </div>
+                <h2 class="gateway-title">Enter Biotap.</h2>
+                <p class="gateway-copy">
+                    Pick where you want to go first. Your first click also starts the site music properly.
+                </p>
+                <div class="gateway-actions">
+                    <button class="gateway-btn primary" id="open-main" type="button">Create a Bio</button>
+                    <button class="gateway-btn discord" id="open-discord" type="button">Join Discord</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="hero is-hidden" id="hero">
             <h1>Request your <span class="hero-glow">Custom Bio</span>.</h1>
             <p>
                 Clean, custom profile pages built personally.
@@ -422,6 +746,89 @@
         const requestForm = document.getElementById("request-form");
         const requestSubmit = document.getElementById("request-submit");
         const successNote = document.getElementById("success-note");
+        const gateway = document.getElementById("gateway");
+        const heroSection = document.getElementById("hero");
+        const mainShell = document.getElementById("main-shell");
+        const openMain = document.getElementById("open-main");
+        const openDiscord = document.getElementById("open-discord");
+        const pageMusic = document.getElementById("page-music");
+        const musicToggle = document.getElementById("music-toggle");
+        let musicEnabled = true;
+        let musicStarted = false;
+        const discordGatewayUrl = "https://discord.gg/8MVsXPq56q";
+
+        function fadeMusicIn(targetVolume = 0.32, duration = 2000) {
+            if (!pageMusic || !musicEnabled) return;
+
+            if (!musicStarted) {
+                pageMusic.currentTime = 0;
+                pageMusic.volume = 0;
+            }
+
+            pageMusic.play().then(() => {
+                musicStarted = true;
+                const start = performance.now();
+
+                function step(now) {
+                    const progress = Math.min((now - start) / duration, 1);
+                    pageMusic.volume = targetVolume * progress;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    }
+                }
+
+                requestAnimationFrame(step);
+            }).catch(() => {
+                /* ignore blocked playback attempts */
+            });
+        }
+
+        function startMusicFromInteraction() {
+            if (!pageMusic || !musicEnabled) {
+                return;
+            }
+            fadeMusicIn();
+        }
+
+        function revealMainSite() {
+            gateway?.classList.add("is-hidden");
+            heroSection?.classList.remove("is-hidden");
+            mainShell?.classList.remove("gateway-mode");
+            musicToggle?.classList.remove("is-hidden");
+        }
+
+        if (openMain) {
+            openMain.addEventListener("click", () => {
+                startMusicFromInteraction();
+                revealMainSite();
+            });
+        }
+
+        if (openDiscord) {
+            openDiscord.addEventListener("click", () => {
+                window.open(discordGatewayUrl, "_blank", "noopener,noreferrer");
+            });
+        }
+
+        if (musicToggle && pageMusic) {
+            musicToggle.addEventListener("click", (event) => {
+                event.stopPropagation();
+
+                if (pageMusic.paused) {
+                    musicEnabled = true;
+                    fadeMusicIn();
+                    musicToggle.textContent = "||";
+                    musicToggle.classList.remove("is-muted");
+                    return;
+                }
+
+                musicEnabled = false;
+                pageMusic.pause();
+                musicToggle.textContent = "♫";
+                musicToggle.classList.add("is-muted");
+            });
+        }
 
         if (requestForm && requestSubmit && successNote) {
             requestForm.addEventListener("submit", async (event) => {
