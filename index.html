@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Biotap</title>
+    <link rel="icon" type="image/png" href="./favicon.png" />
     <style>
         :root {
             color-scheme: dark;
@@ -305,6 +306,14 @@
             text-shadow:
                 0 0 10px rgba(255, 255, 255, 0.14),
                 0 0 28px rgba(121, 240, 255, 0.08);
+        }
+
+        .gateway-title-accent {
+            color: var(--green);
+            text-shadow:
+                0 0 8px rgba(34, 201, 119, 0.55),
+                0 0 16px rgba(34, 201, 119, 0.28),
+                0 0 34px rgba(121, 240, 255, 0.14);
         }
 
         .gateway-copy {
@@ -702,9 +711,9 @@
                     <span class="brand-dot"></span>
                     Gateway
                 </div>
-                <h2 class="gateway-title">Enter Biotap.</h2>
+                <h2 class="gateway-title">biotap<span class="gateway-title-accent">.cc</span></h2>
                 <p class="gateway-copy">
-                    Pick where you want to go first. Your first click also starts the site music properly.
+                    Welcome to biotap, where would you like to go?
                 </p>
                 <div class="gateway-actions">
                     <button class="gateway-btn primary" id="open-main" type="button">Create a Bio</button>
