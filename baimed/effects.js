@@ -7,6 +7,8 @@ const backgroundMusic = document.getElementById("bgmusic");
 const username = document.getElementById("username");
 const status = document.getElementById("status");
 const discordIcon = document.getElementById("discord-icon");
+const discordIconImage = document.getElementById("discord-icon-image");
+const discordIconFallback = document.getElementById("discord-icon-fallback");
 const discordTitle = document.getElementById("discord-title");
 const discordSubtext = document.getElementById("discord-subtext");
 const joined = document.getElementById("joined");
@@ -410,7 +412,9 @@ async function hydrateDiscordCard(card) {
 
         if (data.name) {
             discordTitle.textContent = data.name;
-            discordIcon.textContent = data.name.charAt(0).toUpperCase();
+            if (discordIconFallback) {
+                discordIconFallback.textContent = data.name.charAt(0).toUpperCase();
+            }
         }
 
         discordSubtext.innerHTML = `
@@ -430,6 +434,17 @@ async function hydrateDiscordCard(card) {
             card.href = fallbackInvite;
         }
     }
+}
+
+if (discordIconImage && discordIconFallback) {
+    discordIconImage.addEventListener("load", () => {
+        discordIconFallback.style.display = "none";
+    });
+
+    discordIconImage.addEventListener("error", () => {
+        discordIconImage.style.display = "none";
+        discordIconFallback.style.display = "flex";
+    });
 }
 
 /* intro click */
