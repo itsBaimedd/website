@@ -5,6 +5,7 @@ const particlesCanvas = document.getElementById("particles");
 const cursorLight = document.getElementById("cursor-light");
 const socialCard = document.getElementById("social-card");
 const backgroundMusic = document.getElementById("bgmusic");
+const welcomeSound = document.getElementById("welcome-sound");
 const username = document.getElementById("username");
 const status = document.getElementById("status");
 const discordIcon = document.getElementById("discord-icon");
@@ -56,6 +57,17 @@ function fadeInAudio(audio, targetVolume = 0.45, duration = 2200, startAt = 1) {
 
         requestAnimationFrame(step);
     }).catch(() => {
+        /* ignore blocked playback attempts */
+    });
+}
+
+function playOneShotAudio(audio, volume = 0.82) {
+    if (!audio) return;
+
+    audio.pause();
+    audio.currentTime = 0;
+    audio.volume = volume;
+    audio.play().catch(() => {
         /* ignore blocked playback attempts */
     });
 }
@@ -146,6 +158,12 @@ function resetInitialState() {
         backgroundMusic.currentTime = 0;
         backgroundMusic.volume = 0;
         backgroundMusic.muted = false;
+    }
+
+    if (welcomeSound) {
+        welcomeSound.pause();
+        welcomeSound.currentTime = 0;
+        welcomeSound.volume = 0.82;
     }
 }
 
@@ -537,6 +555,7 @@ function startExperience() {
         welcomeSplash.classList.remove("show");
         welcomeSplash.offsetHeight;
         welcomeSplash.classList.add("show");
+        playOneShotAudio(welcomeSound);
         window.clearTimeout(welcomeSplashTimeout);
         welcomeSplashTimeout = window.setTimeout(() => {
             welcomeSplash.classList.remove("show");

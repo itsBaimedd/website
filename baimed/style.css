@@ -1257,25 +1257,25 @@ button:focus-visible {
     align-items: center;
     justify-content: center;
     border-radius: var(--radius-pill);
-    background: linear-gradient(135deg, rgba(255, 143, 197, 0.92), rgba(216, 63, 145, 0.88));
+    background: linear-gradient(135deg, rgba(255, 177, 216, 0.94), rgba(238, 95, 165, 0.88));
     border: 2px solid rgba(255, 255, 255, 0.76);
     box-shadow:
-        0 12px 28px rgba(188, 65, 126, 0.20),
-        0 0 22px rgba(255, 125, 188, 0.24),
+        0 12px 28px rgba(188, 65, 126, 0.16),
+        0 0 22px rgba(255, 151, 204, 0.22),
         inset 0 1px 0 rgba(255, 255, 255, 0.56),
-        inset 0 -6px 12px rgba(174, 31, 101, 0.16);
+        inset 0 -6px 12px rgba(174, 31, 101, 0.11);
     line-height: 0;
     transition: transform var(--speed) var(--ease), box-shadow var(--speed) var(--ease), background var(--speed) var(--ease);
 }
 
 #social-icons a:hover {
     transform: translateY(-3px) scale(1.06);
-    background: linear-gradient(135deg, rgba(255, 115, 181, 0.96), rgba(196, 38, 121, 0.92));
+    background: linear-gradient(135deg, rgba(255, 156, 207, 0.98), rgba(226, 74, 151, 0.90));
     box-shadow:
-        0 16px 32px rgba(188, 65, 126, 0.26),
-        0 0 28px rgba(255, 125, 188, 0.34),
+        0 16px 32px rgba(188, 65, 126, 0.22),
+        0 0 28px rgba(255, 151, 204, 0.30),
         inset 0 1px 0 rgba(255, 255, 255, 0.58),
-        inset 0 -6px 12px rgba(174, 31, 101, 0.18);
+        inset 0 -6px 12px rgba(174, 31, 101, 0.13);
 }
 
 #social-icons img {
