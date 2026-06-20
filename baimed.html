@@ -5,15 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>baimed</title>
     <meta property="og:title" content="Baimed" />
-    <meta property="og:description" content="i move different, that’s the difference." />
+    <meta property="og:description" content="i move different, that&rsquo;s the difference." />
     <meta property="og:url" content="https://biotap.cc/baimed" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://biotap.cc/baimed/assets/pfp.gif" />
     <link rel="canonical" href="https://biotap.cc/baimed" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Baimed" />
-    <meta name="twitter:description" content="i move different, that’s the difference." />
+    <meta name="twitter:description" content="i move different, that&rsquo;s the difference." />
     <meta name="twitter:image" content="https://biotap.cc/baimed/assets/pfp.gif" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=Yeseva+One&display=swap"
+        rel="stylesheet"
+    />
     <link rel="stylesheet" href="./baimed/style.css" />
     <style>
         :root {
@@ -22,40 +28,84 @@
     </style>
 </head>
 <body>
-    <video autoplay muted loop playsinline id="bgvid">
+    <video autoplay muted loop playsinline id="bgvid" aria-hidden="true">
         <source src="./baimed/assets/background.mp4" type="video/mp4" />
         <source src="https://website-1ir.pages.dev/assets/background.mp4" type="video/mp4" />
     </video>
-    <audio id="bgmusic" loop>
+    <audio id="bgmusic" loop preload="auto">
         <source src="./baimed/assets/backgroundmusic.mp3" type="audio/mpeg" />
     </audio>
 
-    <div id="bg-overlay"></div>
-    <canvas id="particles"></canvas>
-    <div id="cursor-light"></div>
+    <div id="bg-overlay" aria-hidden="true"></div>
+    <canvas id="particles" aria-hidden="true"></canvas>
+    <div id="cursor-light" aria-hidden="true"></div>
 
-    <div id="intro">
-        <div id="heart">♡</div>
-        <div id="enter">click to enter</div>
+    <div class="sticker-field" aria-hidden="true">
+        <span class="sticker sparkle sparkle-a"></span>
+        <span class="sticker sparkle sparkle-b"></span>
+        <span class="sticker sparkle sparkle-c"></span>
+        <span class="sticker sparkle sparkle-d"></span>
+        <span class="sticker bubble-pair bubble-a"></span>
+        <span class="sticker bubble-pair bubble-b"></span>
+        <span class="sticker bubble-pair bubble-c"></span>
+        <span class="sticker heart-drop heart-a"></span>
+        <span class="sticker heart-drop heart-b"></span>
+        <span class="sticker heart-drop heart-c"></span>
+    </div>
+
+    <button id="intro" type="button" aria-label="Enter Baimed profile">
+        <span id="enter">click to enter</span>
+    </button>
+
+    <div id="welcome-splash" aria-hidden="true">
+        <span>WELCOME!</span>
     </div>
 
     <main id="main">
-        <section id="profile-wrap">
-            <div id="member-rank">
-                <img
-                    src="./baimed/assets/user.png"
-                    alt="Member icon"
-                    id="member-rank-icon"
-                    onerror="this.onerror=null;this.src='https://website-1ir.pages.dev/assets/user.png';"
-                />
-                <span id="member-rank-tooltip">User: #1</span>
+        <section id="profile-wrap" aria-labelledby="username">
+            <div class="deco deco-star deco-star-one" aria-hidden="true">&#10022;</div>
+            <div class="deco deco-star deco-star-two" aria-hidden="true">&#10023;</div>
+            <div class="deco deco-heart deco-heart-one" aria-hidden="true">&hearts;</div>
+            <div class="deco deco-heart deco-heart-two" aria-hidden="true">&hearts;</div>
+            <div class="deco deco-bubble deco-bubble-one" aria-hidden="true"></div>
+            <div class="deco deco-bubble deco-bubble-two" aria-hidden="true"></div>
+            <div class="deco deco-drop deco-drop-one" aria-hidden="true"></div>
+
+            <div id="top-badges" aria-label="Profile badges">
+                <div id="badges">
+                    <span class="badge badge-owner">
+                        <img src="./baimed/assets/crown.png" alt="Owner badge" class="badge-icon" />
+                        <span class="badge-tooltip">Owner</span>
+                    </span>
+                    <span class="badge badge-owner">
+                        <img
+                            src="./baimed/assets/beta.png"
+                            alt="Beta badge"
+                            class="badge-icon"
+                            onerror="this.onerror=null;this.src='https://website-1ir.pages.dev/assets/beta.png';"
+                        />
+                        <span class="badge-tooltip">Beta</span>
+                    </span>
+                </div>
+
+                <div id="member-rank">
+                    <img
+                        src="./baimed/assets/user.png"
+                        alt="Member icon"
+                        id="member-rank-icon"
+                        onerror="this.onerror=null;this.src='https://website-1ir.pages.dev/assets/user.png';"
+                    />
+                    <span id="member-rank-tooltip">User: #1</span>
+                </div>
             </div>
 
             <div id="top-row">
                 <div id="pfp-wrap">
-                    <img id="pfp" src="./baimed/assets/pfp.gif" alt="Profile picture" />
-                    <div id="profile-views" data-user="baimed">
-                        <span class="views-eye">◉</span>
+                    <span class="avatar-ring" aria-hidden="true"></span>
+                    <span class="avatar-bow" aria-hidden="true"></span>
+                    <img id="pfp" src="./baimed/assets/pfp.gif" alt="Baimed profile picture" />
+                    <div id="profile-views" data-user="baimed" aria-label="Profile views">
+                        <img class="views-eye" src="./baimed/assets/eye.png" alt="" aria-hidden="true" />
                         <span id="profile-views-count">...</span>
                     </div>
                 </div>
@@ -63,26 +113,47 @@
                 <div id="identity">
                     <div id="name-row">
                         <h1 id="username" data-text="Baimed"></h1>
-                        <div id="badges">
-                            <span class="badge badge-owner">
-                                <img src="./baimed/assets/crown.png" alt="Owner badge" class="badge-icon" />
-                                <span class="badge-tooltip">Owner</span>
-                            </span>
-                            <span class="badge badge-owner">
-                                <img
-                                    src="./baimed/assets/beta.png"
-                                    alt="Beta badge"
-                                    class="badge-icon"
-                                    onerror="this.onerror=null;this.src='https://website-1ir.pages.dev/assets/beta.png';"
-                                />
-                                <span class="badge-tooltip">Beta</span>
-                            </span>
-                        </div>
                     </div>
 
                     <p id="status" data-text="i move different, that&rsquo;s the difference."></p>
                     <p id="joined" data-joined-date="2026-04-08">Joined today</p>
                 </div>
+            </div>
+
+            <div class="profile-grid" aria-label="Profile details">
+                <section class="mini-card about-card">
+                    <h2>About Me</h2>
+                    <p>Minecraft coder, Valorant grinder, and voice chat lover. Ascendant 3, always creating, competing, and having fun.</p>
+                </section>
+
+                <section class="mini-card">
+                    <h2>Interests</h2>
+                    <div class="tag-list">
+                        <span>Minecraft</span>
+                        <span>Valorant</span>
+                        <span>Friends</span>
+                        <span>Editing</span>
+                    </div>
+                </section>
+
+                <section class="mini-card music-card">
+                    <h2>Favorite Music</h2>
+                    <a href="#" id="spotify-playlist-link" class="music-link" aria-label="Spotify playlist coming soon">
+                        <span class="music-main-note" aria-hidden="true">&#9835;</span>
+                        <span class="floating-note note-one" aria-hidden="true">&#9834;</span>
+                        <span class="floating-note note-two" aria-hidden="true">&#9835;</span>
+                        <span class="floating-note note-three" aria-hidden="true">&#9833;</span>
+                    </a>
+                </section>
+
+                <section class="mini-card">
+                    <h2>Games</h2>
+                    <div class="tag-list">
+                        <span>Minecraft</span>
+                        <span>Valorant</span>
+                        <span>Call Of Duty</span>
+                    </div>
+                </section>
             </div>
 
             <a
@@ -112,7 +183,7 @@
                         <div id="discord-subtext">
                             <span class="dot"></span>
                             <span>0 Online</span>
-                            <span class="separator">•</span>
+                            <span class="separator">&bull;</span>
                             <span>0 Members</span>
                         </div>
                     </div>
@@ -124,20 +195,20 @@
                 </span>
             </a>
 
-            <div id="social-icons">
-                <a href="#" id="discord-copy" aria-label="Discord">
-                    <img src="./baimed/assets/discord.png" alt="Discord" />
+            <nav id="social-icons" aria-label="Social links">
+                <a href="#" id="discord-copy" aria-label="Copy Discord tag">
+                    <img src="./baimed/assets/discord.png" alt="" aria-hidden="true" />
                     <span id="discord-copy-tooltip">Copied Discord tag</span>
                 </a>
-                <a href="https://www.tiktok.com/@itsBaimed" id="tiktok-link" aria-label="TikTok">
-                    <img src="./baimed/assets/tiktok.png" alt="TikTok" />
+                <a href="https://www.tiktok.com/@itsBaimed" id="tiktok-link" aria-label="Open TikTok">
+                    <img src="./baimed/assets/tiktok.png" alt="" aria-hidden="true" />
                     <span id="tiktok-redirect-tooltip">Redirecting you to TikTok</span>
                 </a>
-                <a href="https://instagram.com/heyitsaustin.lol" id="instagram-link" aria-label="Instagram">
-                    <img src="./baimed/assets/instagram.png" alt="Instagram" />
+                <a href="https://instagram.com/heyitsaustin.lol" id="instagram-link" aria-label="Open Instagram">
+                    <img src="./baimed/assets/instagram.png" alt="" aria-hidden="true" />
                     <span id="instagram-redirect-tooltip">Redirecting you to Instagram</span>
                 </a>
-            </div>
+            </nav>
         </section>
     </main>
 

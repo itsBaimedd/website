@@ -1,4 +1,5 @@
 const intro = document.getElementById("intro");
+const welcomeSplash = document.getElementById("welcome-splash");
 const main = document.getElementById("main");
 const particlesCanvas = document.getElementById("particles");
 const cursorLight = document.getElementById("cursor-light");
@@ -18,6 +19,7 @@ const discordCopy = document.getElementById("discord-copy");
 const tiktokLink = document.getElementById("tiktok-link");
 const instagramLink = document.getElementById("instagram-link");
 const profileWrap = document.getElementById("profile-wrap");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 let started = false;
 let particlesStarted = false;
@@ -28,11 +30,17 @@ let audioPrimed = false;
 let discordTooltipTimeout;
 let tiktokTooltipTimeout;
 let instagramTooltipTimeout;
+let lastCursorParticleAt = 0;
+let welcomeSplashTimeout;
+let introRevealTimeout;
+let particlesAnimationFrameId;
+const cursorTrailParticles = [];
+const cursorTrailShapes = ["heart", "star", "note", "dot"];
 
-function fadeInAudio(audio, targetVolume = 0.45, duration = 2200) {
+function fadeInAudio(audio, targetVolume = 0.45, duration = 2200, startAt = 1) {
     if (!audio) return;
 
-    audio.currentTime = 0;
+    audio.currentTime = startAt;
     audio.volume = 0;
     audio.play().then(() => {
         const startTime = performance.now();
@@ -66,6 +74,79 @@ function primeAudio(audio) {
         audio.muted = false;
         /* ignore blocked playback attempts */
     });
+}
+
+function resetInitialState() {
+    started = false;
+    particlesStarted = false;
+    usernameAnimationStarted = false;
+    statusAnimationStarted = false;
+    discordRedirecting = false;
+    lastCursorParticleAt = 0;
+    cursorTrailParticles.length = 0;
+
+    window.clearTimeout(welcomeSplashTimeout);
+    window.clearTimeout(introRevealTimeout);
+
+    if (particlesAnimationFrameId) {
+        cancelAnimationFrame(particlesAnimationFrameId);
+        particlesAnimationFrameId = null;
+    }
+
+    if (intro) {
+        intro.style.display = "flex";
+        intro.style.opacity = "1";
+        intro.style.transform = "scale(1)";
+    }
+
+    if (welcomeSplash) {
+        welcomeSplash.classList.remove("show");
+        welcomeSplash.style.animation = "none";
+        const welcomeText = welcomeSplash.querySelector("span");
+
+        if (welcomeText) {
+            welcomeText.style.animation = "none";
+        }
+
+        welcomeSplash.offsetHeight;
+        welcomeSplash.style.animation = "";
+
+        if (welcomeText) {
+            welcomeText.style.animation = "";
+        }
+    }
+
+    if (main) {
+        main.style.opacity = "0";
+    }
+
+    if (particlesCanvas) {
+        particlesCanvas.style.display = "none";
+    }
+
+    if (cursorLight) {
+        cursorLight.style.display = "none";
+        cursorLight.style.opacity = "0.44";
+    }
+
+    resetProfileTilt();
+
+    if (username) {
+        username.textContent = "";
+        username.classList.remove("typing-complete", "typewriter-finish");
+    }
+
+    if (status) {
+        status.textContent = "";
+        status.classList.remove("typing-complete");
+    }
+
+    if (backgroundMusic) {
+        backgroundMusic.pause();
+        backgroundMusic.currentTime = 0;
+        backgroundMusic.volume = 0;
+        backgroundMusic.muted = false;
+    }
 }
 
 function typeUsername(element, speed = 175) {
@@ -420,7 +501,7 @@ async function hydrateDiscordCard(card) {
         discordSubtext.innerHTML = `
             <span class="dot"></span>
             <span>${onlineCount} Online</span>
-            <span class="separator">•</span>
+            <span class="separator">&bull;</span>
             <span>${memberCount} Members</span>
         `;
 
@@ -447,54 +528,85 @@ if (discordIconImage && discordIconFallback) {
     });
 }
 
-/* intro click */
-document.addEventListener(
-    "click",
-    () => {
-        if (started) return;
-        started = true;
-        primeAudio(backgroundMusic);
+function startExperience() {
+    if (started) return;
+    started = true;
+    fadeInAudio(backgroundMusic);
 
-        intro.style.opacity = "0";
+    if (welcomeSplash) {
+        welcomeSplash.classList.remove("show");
+        welcomeSplash.offsetHeight;
+        welcomeSplash.classList.add("show");
+        window.clearTimeout(welcomeSplashTimeout);
+        welcomeSplashTimeout = window.setTimeout(() => {
+            welcomeSplash.classList.remove("show");
+        }, 2700);
+    }
 
-        setTimeout(() => {
-            intro.style.display = "none";
-            main.style.opacity = "1";
+    intro.style.opacity = "0";
+    intro.style.transform = "scale(1.015)";
+
+    window.clearTimeout(introRevealTimeout);
+    introRevealTimeout = window.setTimeout(() => {
+        intro.style.display = "none";
+        main.style.opacity = "1";
+
+        if (!prefersReducedMotion) {
             particlesCanvas.style.display = "block";
             cursorLight.style.display = "block";
+        }
 
-            fadeInAudio(backgroundMusic);
-            typeUsername(username);
-            typeStatus(status);
-            typeDocumentTitle();
-            updateJoinedText(joined);
-            hydrateProfileViews(profileViews, profileViewsCount);
-            hydrateDiscordCard(socialCard);
+        typeUsername(username);
+        typeStatus(status);
+        typeDocumentTitle();
+        updateJoinedText(joined);
+        hydrateProfileViews(profileViews, profileViewsCount);
+        hydrateDiscordCard(socialCard);
 
-            if (!particlesStarted) {
-                particlesStarted = true;
-                startParticles();
-            }
-        }, 700);
-    },
-    { once: true }
-);
+        if (!particlesStarted && !prefersReducedMotion) {
+            particlesStarted = true;
+            startParticles();
+        }
+    }, 700);
+}
+
+resetInitialState();
+
+window.addEventListener("pageshow", (event) => {
+    if (event.persisted) {
+        resetInitialState();
+    }
+});
+
+document.addEventListener("click", startExperience);
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        startExperience();
+    }
+});
 
 /* cursor light follow */
 document.addEventListener("mousemove", (e) => {
+    if (prefersReducedMotion) return;
+
     cursorLight.style.left = `${e.clientX}px`;
     cursorLight.style.top = `${e.clientY}px`;
+    emitCursorTrail(e.clientX, e.clientY);
     updateProfileTilt(e);
 });
 
 /* hide cursor light over the middle box */
-socialCard.addEventListener("mouseenter", () => {
-    cursorLight.style.opacity = "0";
-});
+if (socialCard) {
+    socialCard.addEventListener("mouseenter", () => {
+        cursorLight.style.opacity = "0";
+    });
 
-socialCard.addEventListener("mouseleave", () => {
-    cursorLight.style.opacity = "0.32";
-});
+    socialCard.addEventListener("mouseleave", () => {
+        cursorLight.style.opacity = "0.44";
+    });
+}
 
 document.addEventListener("mouseleave", resetProfileTilt);
 
@@ -556,6 +668,34 @@ if (tiktokLink) {
     });
 }
 
+function emitCursorTrail(x, y) {
+    if (!started || !particlesStarted) return;
+
+    const now = performance.now();
+
+    if (now - lastCursorParticleAt < 18) return;
+
+    lastCursorParticleAt = now;
+
+    cursorTrailParticles.push({
+        x,
+        y,
+        vx: (Math.random() - 0.5) * 0.58,
+        vy: -0.54 - Math.random() * 0.72,
+        size: 9 + Math.random() * 8,
+        age: 0,
+        life: 820 + Math.random() * 360,
+        alpha: 0.50 + Math.random() * 0.24,
+        rotation: (Math.random() - 0.5) * 0.8,
+        spin: (Math.random() - 0.5) * 0.024,
+        shape: cursorTrailShapes[Math.floor(Math.random() * cursorTrailShapes.length)]
+    });
+
+    if (cursorTrailParticles.length > 110) {
+        cursorTrailParticles.splice(0, cursorTrailParticles.length - 110);
+    }
+}
+
 /* subtle particles */
 function startParticles() {
     const canvas = particlesCanvas;
@@ -570,16 +710,20 @@ function startParticles() {
     window.addEventListener("resize", resize);
 
     const dots = [];
-    const count = 26;
+    const count = 42;
+    const shapes = ["dot", "star", "heart", "petal"];
 
     for (let i = 0; i < count; i++) {
         dots.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 0.10,
-            vy: (Math.random() - 0.5) * 0.10,
-            size: Math.random() * 1.35 + 0.2,
-            alpha: Math.random() * 0.18 + 0.04
+            vx: (Math.random() - 0.5) * 0.16,
+            vy: Math.random() * 0.12 + 0.025,
+            size: Math.random() * 2.4 + 1.2,
+            alpha: Math.random() * 0.30 + 0.12,
+            shape: shapes[Math.floor(Math.random() * shapes.length)],
+            rotation: Math.random() * Math.PI * 2,
+            spin: (Math.random() - 0.5) * 0.006
         });
     }
 
@@ -589,19 +733,100 @@ function startParticles() {
         for (const p of dots) {
             p.x += p.vx;
             p.y += p.vy;
+            p.rotation += p.spin;
 
             if (p.x < -5) p.x = canvas.width + 5;
             if (p.x > canvas.width + 5) p.x = -5;
-            if (p.y < -5) p.y = canvas.height + 5;
-            if (p.y > canvas.height + 5) p.y = -5;
+            if (p.y > canvas.height + 8) p.y = -8;
 
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation);
+            ctx.globalAlpha = p.alpha;
             ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
+
+            if (p.shape === "heart") {
+                ctx.fillStyle = "rgba(255,125,188,1)";
+                ctx.font = `${p.size * 4}px serif`;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText("\u2661", 0, 0);
+                ctx.restore();
+                continue;
+            }
+
+            if (p.shape === "star") {
+                ctx.fillStyle = "rgba(185,155,255,1)";
+                ctx.font = `${p.size * 4}px serif`;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText("\u2726", 0, 0);
+                ctx.restore();
+                continue;
+            }
+
+            if (p.shape === "petal") {
+                ctx.ellipse(0, 0, p.size * 0.72, p.size * 1.8, 0, 0, Math.PI * 2);
+                ctx.fillStyle = "rgba(255,183,216,1)";
+                ctx.fill();
+                ctx.restore();
+                continue;
+            }
+
+            ctx.arc(0, 0, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(255,255,255,1)";
             ctx.fill();
+            ctx.restore();
         }
 
-        requestAnimationFrame(animate);
+        for (let i = cursorTrailParticles.length - 1; i >= 0; i--) {
+            const p = cursorTrailParticles[i];
+            p.age += 16.67;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.006;
+            p.rotation += p.spin;
+
+            const progress = Math.min(p.age / p.life, 1);
+            const fade = 1 - progress;
+
+            if (progress >= 1) {
+                cursorTrailParticles.splice(i, 1);
+                continue;
+            }
+
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation);
+            ctx.globalAlpha = p.alpha * fade;
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.shadowColor = "rgba(255, 125, 188, 0.46)";
+            ctx.shadowBlur = 14;
+
+            if (p.shape === "heart") {
+                ctx.fillStyle = "rgba(255, 111, 181, 1)";
+                ctx.font = `${p.size}px serif`;
+                ctx.fillText("\u2661", 0, 0);
+            } else if (p.shape === "star") {
+                ctx.fillStyle = "rgba(212, 178, 255, 1)";
+                ctx.font = `${p.size}px serif`;
+                ctx.fillText("\u2726", 0, 0);
+            } else if (p.shape === "note") {
+                ctx.fillStyle = "rgba(216, 63, 145, 1)";
+                ctx.font = `${p.size}px serif`;
+                ctx.fillText("\u266a", 0, 0);
+            } else {
+                ctx.beginPath();
+                ctx.arc(0, 0, p.size * 0.22, 0, Math.PI * 2);
+                ctx.fillStyle = "rgba(255, 255, 255, 1)";
+                ctx.fill();
+            }
+
+            ctx.restore();
+        }
+
+        particlesAnimationFrameId = requestAnimationFrame(animate);
     }
 
     animate();
