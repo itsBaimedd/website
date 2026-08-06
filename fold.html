@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#090a0c" />
+    <title>Fold</title>
+    <meta name="description" content="Fold on Biotap." />
+    <meta property="og:title" content="Fold" />
+    <meta property="og:description" content="Fold on Biotap." />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://biotap.cc/fold" />
+    <meta property="og:image" content="https://biotap.cc/fold/assets/pfp.png" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="canonical" href="https://biotap.cc/fold" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./fold/style.css" />
+</head>
+<body>
+    <img class="background" src="./fold/assets/background.png" alt="" aria-hidden="true" />
+    <audio id="background-music" loop preload="auto">
+        <source src="./fold/assets/backgroundsong.mp3" type="audio/mpeg" />
+    </audio>
+    <div class="backdrop" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <button class="intro" id="intro" type="button" aria-label="Enter Fold's profile">
+        <small>click to enter</small>
+    </button>
+
+    <main class="stage" id="stage">
+        <section class="profile" id="profile" aria-label="Fold profile">
+            <div class="fold-sheet sheet-one" aria-hidden="true"></div>
+            <div class="fold-sheet sheet-two" aria-hidden="true"></div>
+            <div class="top-rule" aria-hidden="true"></div>
+
+            <div class="view-count" id="profile-views" data-user="fold" aria-label="Profile views">
+                <img src="./fold/assets/eye.png" alt="" />
+                <span id="profile-views-count">...</span>
+            </div>
+
+            <div class="profile-badges" aria-label="Profile badges">
+                <span class="profile-badge" tabindex="0">
+                    <img src="./fold/assets/user.png" alt="Member" />
+                    <span class="badge-tooltip">Member</span>
+                </span>
+                <span class="profile-badge" tabindex="0">
+                    <img src="./fold/assets/beta.png" alt="Beta" />
+                    <span class="badge-tooltip">Beta</span>
+                </span>
+            </div>
+
+            <header class="identity">
+                <div class="portrait-orbit">
+                    <span class="orbit orbit-one" aria-hidden="true"></span>
+                    <span class="orbit orbit-two" aria-hidden="true"></span>
+                    <div class="avatar-frame">
+                        <img class="avatar" src="./fold/assets/pfp.png" alt="Fold profile picture" />
+                    </div>
+                </div>
+                <h1 data-echo="FOLD">FOLD</h1>
+            </header>
+
+            <nav class="socials" aria-label="Fold's social profiles">
+                <button class="social copy-social" type="button" data-platform="Discord" data-copy="foldcat">
+                    <span class="social-icon"><img src="./fold/assets/discord.png" alt="" /></span>
+                    <span class="social-copy"><strong>Discord</strong><small>foldcat</small></span>
+                </button>
+                <a class="social" href="https://www.instagram.com/SADfoodcat/" target="_blank" rel="noopener noreferrer">
+                    <span class="social-icon"><img src="./fold/assets/instagram.png" alt="" /></span>
+                    <span class="social-copy"><strong>Instagram</strong><small>SADfoodcat</small></span>
+                </a>
+            </nav>
+
+        </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">Discord copied</div>
+    <script src="./fold/effects.js"></script>
+</body>
+</html>
