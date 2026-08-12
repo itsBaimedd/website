@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#050505" />
+    <title>ishehim</title>
+    <meta name="description" content="ishehim on Biotap — John 3:16." />
+    <meta property="og:title" content="ishehim" />
+    <meta property="og:description" content="For God so loved the world, that He gave His only begotten Son." />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://biotap.cc/ishehim" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="canonical" href="https://biotap.cc/ishehim" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./ishehim/style.css" />
+</head>
+<body>
+    <audio id="background-music" loop preload="auto">
+        <source src="./ishehim/assets/backgroundmusic.mp3" type="audio/mpeg" />
+    </audio>
+    <div class="void" aria-hidden="true">
+        <span class="halo halo-one"></span>
+        <span class="halo halo-two"></span>
+        <span class="halo halo-three"></span>
+        <span class="light-column"></span>
+    </div>
+    <canvas id="dust" aria-hidden="true"></canvas>
+
+    <button class="intro" id="intro" type="button" aria-label="Enter ishehim's profile">
+        <span class="intro-cross" aria-hidden="true"></span>
+        <span>click to enter</span>
+    </button>
+
+    <main class="stage" id="stage">
+        <section class="profile" id="profile" aria-label="ishehim profile">
+            <div class="corner corner-top" aria-hidden="true"></div>
+            <div class="corner corner-bottom" aria-hidden="true"></div>
+
+            <div class="profile-meta">
+                <div class="views" id="profile-views" data-user="ishehim" aria-label="Profile views">
+                    <img src="./ishehim/assets/eye.png" alt="" />
+                    <span id="profile-views-count">...</span>
+                </div>
+                <div class="badges" aria-label="Profile badges">
+                    <span class="badge" tabindex="0">
+                        <img src="./ishehim/assets/user.png" alt="Member" />
+                        <span class="tooltip">9</span>
+                    </span>
+                    <span class="badge" tabindex="0">
+                        <img src="./ishehim/assets/beta.png" alt="Beta" />
+                        <span class="tooltip">Beta</span>
+                    </span>
+                </div>
+            </div>
+
+            <header class="identity">
+                <div class="avatar-space" aria-label="Black profile picture" role="img">
+                    <span class="avatar-ring"></span>
+                    <span class="avatar-black"></span>
+                </div>
+                <h1 id="username" data-text="ishehim">ishehim</h1>
+                <div class="name-rule" aria-hidden="true"><span></span></div>
+            </header>
+
+            <figure class="scripture">
+                <figcaption>John 3:16</figcaption>
+                <blockquote id="verse" data-text="For God so loved the world, that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life."></blockquote>
+            </figure>
+
+            <div class="profile-details">
+                <div class="about-box">
+                    <span class="about-mark" aria-hidden="true">✦</span>
+                    <span>I'm a Minecraft developer and professional PvPer.</span>
+                </div>
+
+                <button class="discord-button" id="discord-copy" type="button" data-copy="ishehimm">
+                    <span class="discord-icon"><img src="./ishehim/assets/discord.png" alt="" /></span>
+                    <span class="discord-copy"><strong>Discord</strong></span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">Discord copied</div>
+    <script src="./ishehim/effects.js"></script>
+</body>
+</html>
